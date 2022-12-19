@@ -1,3 +1,10 @@
+<?php
+    session_start();           
+    if (!$_SESSION ['login']) { // si la session n'est pas ouverte (protection de barre d'adresse)
+        header('Location: connexion.php'); // redirection vers la page de connexion
+    }
+    session_abort();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,10 +18,6 @@
     <?php
         require ('header1.php');
         require ('connect.php');
-        if (!$_SESSION['loginOK']){
-            header('Location: connexion.php');
-        }
-
          if (isset($_GET['id'])) {
             $id = (int)$_GET['id'];
             // récupération des résa
@@ -25,6 +28,7 @@
             list($date, $heure_d) = explode(" ", $resultat['debut']);
             list($date, $heure_f) = explode(" ", $resultat['fin']);
         }
+     
     ?>
 
     <!-- contenu -->
